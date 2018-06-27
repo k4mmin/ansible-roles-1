@@ -41,7 +41,7 @@
 
 - name: Copying ssh home directory
   copy:
-    src: /home/{{ remote_exec1.ssh_default_username }}/.ssh
+    src: /home/ubuntu/.ssh
     dest: /home/emergya/
     owner: emergya
     group: emergya
