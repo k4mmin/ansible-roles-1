@@ -1,0 +1,51 @@
+---
+# tasks file for remote_exec1
+- name: Add the user 'emergya' with a bash shell and sudo group
+  user:
+    name:  {{ var.ssh_username }}
+    state: present
+    shell: /bin/bash
+    createhome: yes
+    groups: sudo
+    append: yes
+
+# #https://docs.ansible.com/ansible/latest/modules/file_module.html#file-module
+# - name: Create user home directory
+#   file:
+#     path: /home/{{ var.ssh_username }}
+#     state: directory
+#     owner: {{ var.ssh_username }}
+#     mode: 0775
+
+# #https://docs.ansible.com/ansible/latest/modules/synchronize_module.html
+# - name: Synchronization with --archive mode
+#   synchronize:
+#     src: /etc/skel/
+#     dest: /home/{{ var.ssh_username }}/
+#     archive: yes
+
+- name: Create ssh user directory
+  file:
+    path: /home/{{ var.ssh_username }}/.ssh
+    state: directory
+    owner: {{ var.ssh_username }}
+    group: {{ var.ssh_username }}
+    mode: 0700
+
+- name: Copying ssh home directory
+  copy:
+    src: /home/{{ var.ssh_default_username }}/.ssh
+    dest: /home/{{ var.ssh_username }}/
+    owner: {{ var.ssh_username }}
+    group: {{ var.ssh_username }}
+    mode: 0600
+
+- name: Create sudoers file
+  file:
+    path: /etc/sudoers.d/99-ssh-username
+    state: touch
+
+- name: Add user to sudoers file
+  lineinfile:
+    path: /etc/sudoers.d/99-ssh-username
+    line: '{{ var.ssh_username }} ALL=(ALL) NOPASSWD:ALL'
