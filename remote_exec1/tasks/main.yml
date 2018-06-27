@@ -39,7 +39,22 @@
     group: emergya
     mode: 0700
 
-- name: Copying ssh home directory
+- name: get file names to copy
+  command: "find /home/ubuntu/.ssh -type f"
+  register: files_to_copy
+
+- name: copy files
+  copy:
+    src: "{{ item }}"
+    dest: "/hoome/emergya"
+    owner: emergya
+    group: emergya
+    remote_src: True
+    #mode: 0644
+  with_items:
+   - "{{ files_to_copy.stdout_lines }}"
+
+#- name: Copying ssh home directory
   # "Remote copy does not support recursive copy of directory"
   # copy:
   #   src: /home/ubuntu/.ssh
@@ -48,12 +63,13 @@
   #   group: emergya
   #   mode: 0600
   #   remote_src: yes
-  synchronize:
-    src: /home/ubuntu/.ssh
-    dest: /home/emergya
-    dirs: yes
-  delegate_to: localhost
-
+  #-------------------------------
+  # "Uses ssh conection with localhost (wtf?)"
+  # synchronize:
+  #   src: /home/ubuntu/.ssh
+  #   dest: /home/emergya
+  #   dirs: yes
+  # delegate_to: localhost
 
 
 - name: Create sudoers file
