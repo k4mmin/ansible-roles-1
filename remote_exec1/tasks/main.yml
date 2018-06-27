@@ -40,14 +40,21 @@
     mode: 0700
 
 - name: Copying ssh home directory
-  copy:
+  # "Remote copy does not support recursive copy of directory"
+  # copy:
+  #   src: /home/ubuntu/.ssh
+  #   dest: /home/emergya/
+  #   owner: emergya
+  #   group: emergya
+  #   mode: 0600
+  #   remote_src: yes
+  synchronize:
     src: /home/ubuntu/.ssh
-    dest: /home/emergya/
-    owner: emergya
-    group: emergya
-    mode: 0600
-    remote_src: yes
-  
+    dest: /home/emergya/.ssh
+  delegate_to: node
+
+
+
 - name: Create sudoers file
   file:
     path: /etc/sudoers.d/99-ssh-username
