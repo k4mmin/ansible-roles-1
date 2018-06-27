@@ -3,6 +3,6 @@
   name: Collect facts
   tasks: [ ]
   become: true
-  
+
   roles:
-      - remote_exec1
+      - remote_exec2
