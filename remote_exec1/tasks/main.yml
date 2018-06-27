@@ -46,8 +46,8 @@
     owner: emergya
     group: emergya
     mode: 0600
-  become: yes
-
+    remote_src: yes
+  
 - name: Create sudoers file
   file:
     path: /etc/sudoers.d/99-ssh-username
