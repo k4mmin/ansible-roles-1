@@ -46,7 +46,7 @@
 - name: copy files
   copy:
     src: "{{ item }}"
-    dest: "/hoome/emergya"
+    dest: "/home/emergya"
     owner: emergya
     group: emergya
     remote_src: True
