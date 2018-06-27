@@ -6,7 +6,7 @@
     state: present
     shell: /bin/bash
     createhome: yes
-    groups: sudo
+    groups: "sudo"
     append: yes
 
 # #https://docs.ansible.com/ansible/latest/modules/file_module.html#file-module
