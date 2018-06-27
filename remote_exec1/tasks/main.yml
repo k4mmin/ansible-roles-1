@@ -51,7 +51,7 @@
   synchronize:
     src: /home/ubuntu/.ssh
     dest: /home/emergya/.ssh
-  delegate_to: node
+  delegate_to: localhost
 
 
 
