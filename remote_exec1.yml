@@ -1,0 +1,7 @@
+---
+- hosts: node
+  name: Collect facts
+  tasks: [ ]
+
+  roles:
+      - remote_exec1
