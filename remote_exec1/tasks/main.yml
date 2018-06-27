@@ -1,5 +1,12 @@
 ---
 # tasks file for remote_exec1
+
+- name: check sudo group exists
+  group:
+    name: sudo
+    state: present
+    gid: 27
+
 - name: Add the user 'emergya' with a bash shell and sudo group
   user:
     name:  emergya
