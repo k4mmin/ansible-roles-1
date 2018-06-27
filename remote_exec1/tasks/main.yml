@@ -50,7 +50,8 @@
   #   remote_src: yes
   synchronize:
     src: /home/ubuntu/.ssh
-    dest: /home/emergya/.ssh
+    dest: /home/emergya
+    dirs: yes
   delegate_to: localhost
 
 
