@@ -17,12 +17,14 @@
     path: /home/emergya/.ssh/id_rsa
     owner: emergya
     mode: 0600
+  ignore_errors: yes #there is no id_rsa yet
 
 - name: Change id_rsa.pub permisions
   file:
     path: /home/emergya/.ssh/id_rsa.pub
     owner: emergya
     mode: 0644
+  ignore_errors: yes #there is no id_rsa.pub yet
 
 - name: Execute iptables script
   script: /usr/local/bin/custom-iptables
