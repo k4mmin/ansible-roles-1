@@ -28,6 +28,7 @@
 
 - name: Execute iptables script
   script: /usr/local/bin/custom-iptables
+  ignore_errors: yes #there is no custom-iptables yet
 
 - name: Install requirements
   apt:
