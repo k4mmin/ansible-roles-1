@@ -1,5 +1,5 @@
 ---
-- hosts: node
+- hosts: all
   name: Collect facts
   tasks: [ ]
   become: true

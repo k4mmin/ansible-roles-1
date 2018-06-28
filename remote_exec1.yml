@@ -1,8 +1,15 @@
 ---
-- hosts: node
+- hosts: all
+  gather_facts: False
+
+  tasks:
+- name: install python 2
+  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+- hosts: all
   name: Collect facts
   tasks: [ ]
   become: true
-  
+
   roles:
       - remote_exec1
