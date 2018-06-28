@@ -1,2 +1,118 @@
 ---
 # tasks file for remote_exec2
+- name: Create symbolic link for locatime
+  file:
+    src: "/usr/share/zoneinfo/Europe/Madrid"
+    dest: "/etc/localtime"
+    state: link
+
+# not necessary
+# - name: Change ownership of home directory
+#   file:
+#     path: /home/emergya
+#     owner: emergya
+
+- name: Change id_rsa permisions
+  file:
+    path: /home/emergya/.ssh/id_rsa
+    owner: emergya
+    mode: 0600
+
+- name: Change id_rsa.pub permisions
+  file:
+    path: /home/emergya/.ssh/id_rsa.pub
+    owner: emergya
+    mode: 0644
+
+- name: Execute iptables script
+  script: /usr/local/bin/custom-iptables
+
+- name: Install requirements
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+     - facter
+     - curl
+     - git
+     - curl
+     - expect
+     - iptables-persistent
+     - nfs-common
+     - htop
+     - sysstat
+     - iotop
+     - bwm-ng
+     - rsync
+     - tcpdump
+     - tcpick
+     - strace
+     - screen
+     - inotify-tools
+     - socat
+     - bash-completion
+     - ntp
+     - ntpdate
+
+- name: Delete iptables.rules file
+  file:
+    state: absent
+    path: "/etc/iptables/rules.v4"
+
+# check this!!!!
+- name: execute command
+  shell: sudo iptables-save | sudo tee -a /etc/iptables/rules.v4
+
+- name: Edit ssh config
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: 'PermitRootLogin yes'
+    line: 'PermitRootLogin without-password'
+
+- name: Restart ssh service
+  service:
+    name: sshd
+    state: restarted
+
+- name: Download baids repository
+  get_url:
+    url: https://raw.githubusercontent.com/rcmorano/baids/master/baids
+    dest: /tmp/baids
+    mode: 0555
+
+- name: Install baids
+  script: /tmp/baids install
+  become_user: emergya
+
+- name: Create project directory
+  file:
+    path: /home/emergya/Projects/emergya
+    state: directory
+    owner: emergya
+    group: emergya
+    mode: 0775
+
+- name: Login emergya docker-registry
+  get_url:
+    url: https://raw.githubusercontent.com/Emergya/docker-registry-expect-scripted-login/master/docker-registry-expect-scripted-login
+    dest: /usr/local/bin/docker-registry-expect-scripted-login
+    mode: 0775
+
+- name: Clone proyect repository
+  git:
+    repo: 'git@github.com:Emergya/jenkins-dind.git'
+    #repo: 'https://github.com/Emergya/jenkins-dind.git'
+    dest: /home/emergya/Projects/emergya/jenkins-dind
+    clone: yes
+    key_file: /home/emergya/.ssh/id_rsa
+
+- name: Link project baids
+  file:
+    src: "/home/emergya/Projects/emergya/jenkins-dind/baids"
+    dest: "/home/emergya/.baids/functions.d/jenkins-dind"
+    state: link
+
+- name: Load projects baids and install docker requisites
+  command: /home/emergya/.baids/baids && dev-jenkins-dind.emergyalabs.com-install-env
+  become_user: emergya
