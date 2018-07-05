@@ -85,8 +85,6 @@
     mode: 0555
 
 - name: Install baids
-  #script: /tmp/baids install
-  #command: sh ~/baids install
   command: /tmp/baids install
   become_user: emergya
 
@@ -110,7 +108,7 @@
     repo: 'https://github.com/Emergya/jenkins-dind.git'
     dest: /home/emergya/Projects/emergya/jenkins-dind
     clone: yes
-    key_file: /home/emergya/.ssh/id_rsa
+    #key_file: /home/emergya/.ssh/id_rsa
 
 - name: Link project baids
   file:
