@@ -87,7 +87,7 @@
 - name: Install baids
   #script: /tmp/baids install
   #command: sh ~/baids install
-  command: /home/emergya/baids install
+  command: /tmp/baids install
   become_user: emergya
 
 - name: Create project directory
@@ -106,8 +106,8 @@
 
 - name: Clone proyect repository
   git:
-    repo: 'git@github.com:Emergya/jenkins-dind.git'
-    #repo: 'https://github.com/Emergya/jenkins-dind.git'
+    #repo: 'git@github.com:Emergya/jenkins-dind.git'
+    repo: 'https://github.com/Emergya/jenkins-dind.git'
     dest: /home/emergya/Projects/emergya/jenkins-dind
     clone: yes
     key_file: /home/emergya/.ssh/id_rsa
