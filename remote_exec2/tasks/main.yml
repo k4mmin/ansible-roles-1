@@ -87,7 +87,7 @@
 - name: Install baids
   #script: /tmp/baids install
   #command: sh ~/baids install
-  command: source ~/baids install
+  command: /home/emergya/baids install
   become_user: emergya
 
 - name: Create project directory
