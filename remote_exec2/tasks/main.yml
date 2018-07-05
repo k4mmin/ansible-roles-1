@@ -85,7 +85,8 @@
     mode: 0555
 
 - name: Install baids
-  script: /tmp/baids install
+  #script: /tmp/baids install
+  command: "/bin/sh /tmp/baids install"
   become_user: emergya
 
 - name: Create project directory
