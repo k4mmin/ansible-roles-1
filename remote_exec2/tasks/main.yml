@@ -96,7 +96,7 @@
 
 - name: Install baids
   command: /tmp/baids install
-  become_user: emergya
+  #become_user: emergya
 
 - name: Create project directory
   file:
@@ -114,18 +114,28 @@
 
 - name: Clone proyect repository
   git:
-    #repo: 'git@github.com:Emergya/jenkins-dind.git'
-    repo: 'https://github.com/Emergya/jenkins-dind.git'
-    dest: /home/emergya/Projects/emergya/jenkins-dind
+    #repo: 'git@github.com:Emergya/ebs-corporate-sites.git'
+    repo: 'https://github.com/Emergya/ebs-corporate-sites.git'
+    dest: /home/emergya/Projects/emergya/ebs-corporate-sites
     clone: yes
     #key_file: /home/emergya/.ssh/id_rsa
 
 - name: Link project baids
   file:
-    src: "/home/emergya/Projects/emergya/jenkins-dind/baids"
-    dest: "/home/emergya/.baids/functions.d/jenkins-dind"
+    src: "/home/emergya/Projects/emergya/ebs-corporate-sites/baids"
+    dest: "/home/emergya/.baids/functions.d/ebs-corporate-sites"
     state: link
 
 - name: Load projects baids and install docker requisites
-  command: /home/emergya/.baids/baids && dev-jenkins-dind.emergyalabs.com-install-env
-  become_user: emergya
+  command: /home/emergya/.baids/baids && dev-ebs-corporate-sites.emergyalabs.com-install-env
+  #become_user: emergya
+
+- name: Load projects baids and install docker requisites
+  command: /home/emergya/.baids/baids && dev-ebs-corporate-sites.emergyalabs.com-install-env
+  #become_user: emergya
+
+- name: Docker Registry login
+  command: export DOCKER_REGISTRY_URI="{{ docker_registry_uri }}"; export DOCKER_REGISTRY_USER="{{ docker_registry_user }}"; export DOCKER_REGISTRY_PASS="{{ docker_registry_pass }}"; docker-registry-expect-scripted-login
+
+- name: Launch project
+  command: source $HOME/.baids/baids; echo y |dev-ebs-corporate-sites.emergyalabs.com-redeploy
