@@ -6,11 +6,12 @@
   - name: install python 2
     raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
     become: true
-  
+
 - hosts: all
   name: Collect facts
   tasks: [ ]
   become: true
+  become_user: ubuntu #ssh_default_username
 
   roles:
       - remote_exec1
