@@ -3,7 +3,9 @@
   name: Collect facts
   tasks: [ ]
   become: true
-  become_user: emergya
+  remote_user: emergya
+  # become: true
+  # become_user: root
 
   roles:
       - remote_exec2

@@ -10,8 +10,9 @@
 - hosts: all
   name: Collect facts
   tasks: [ ]
-  become: true
-  become_user: ubuntu
+  remote_user: ubuntu
+  # become: true
+  # become_user: root
 
   roles:
       - remote_exec1
