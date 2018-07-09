@@ -15,8 +15,6 @@
     createhome: yes
     groups: 'sudo'
     append: yes
-  become: true
-  become_user: root
 
 # #https://docs.ansible.com/ansible/latest/modules/file_module.html#file-module
 # - name: Create user home directory
