@@ -5,7 +5,9 @@
   tasks:
   - name: install python 2
     raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+    remote_user: ubuntu
     become: true
+    become_user: root
 
 - hosts: all
   name: Collect facts
