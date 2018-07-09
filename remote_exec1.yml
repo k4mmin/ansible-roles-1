@@ -11,7 +11,7 @@
   name: Collect facts
   tasks: [ ]
   become: true
-  become_user: ubuntu #ssh_default_username
+  become_user: ubuntu
 
   roles:
       - remote_exec1
