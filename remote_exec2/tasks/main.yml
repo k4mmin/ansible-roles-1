@@ -114,11 +114,11 @@
 
 - name: Clone proyect repository
   git:
-    #repo: 'git@github.com:Emergya/ebs-corporate-sites.git'
-    repo: 'https://github.com/Emergya/ebs-corporate-sites.git'
+    repo: 'git@github.com:Emergya/ebs-corporate-sites.git'
+    # repo: 'https://github.com/Emergya/ebs-corporate-sites.git'
     dest: /home/emergya/Projects/emergya/ebs-corporate-sites
     clone: yes
-    #key_file: /home/emergya/.ssh/id_rsa
+    key_file: /home/emergya/.ssh/id_rsa
 
 - name: Link project baids
   file:
