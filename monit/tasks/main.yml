@@ -3,7 +3,7 @@
 - name: install monit
   apt:
       name: monit
-      state: installed
+      state: present
       update_cache: yes
 
 - name: copy monit configuration files
@@ -13,7 +13,7 @@
       mode: "0700"
       force: yes
   with_items:
-    - "{{ template_files.stdout_lines }}"
+    - "{{ templates/*.j2 }}"
   notify: restart monit
 
 - name: copy monit scripts
