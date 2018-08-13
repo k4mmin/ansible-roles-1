@@ -1,0 +1,31 @@
+check program base-zpool-capacity-85 with path "/usr/local/bin/monit-check-zpool-capacity base-zpool"
+      alert sistemas@emergya.com with mail-format {
+		subject: [Alertas] $HOST base-zpool capacity is over 85%
+		message: Monit $ACTION $SERVICE at $DATE on $HOST:
+			 $DESCRIPTION.
+
+The exit code of this script is the used space :)
+
+You should be thinking to BUY some extra disk space!
+
+Yours sincerely,
+monit
+      }
+      if status > 85
+      then alert
+
+check program base-zpool-capacity-95 with path "/usr/local/bin/monit-check-zpool-capacity base-zpool"
+      alert sistemas@emergya.com with mail-format {
+		subject: [Alertas] $HOST base-zpool capacity is over 95%
+		message: Monit $ACTION $SERVICE at $DATE on $HOST:
+			 $DESCRIPTION.
+
+The exit code of this script is the used space :)
+
+You should be thinking to INSTALL some extra disk space :)
+
+Yours sincerely,
+monit
+      }
+      if status > 95
+      then alert

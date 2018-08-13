@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ZPOOL="$1"
+ZPOOL_CAPACITY=$(zpool list $ZPOOL -o cap | tail -n1 | sed 's|%||g')
+
+echo $ZPOOL_CAPACITY
+exit $ZPOOL_CAPACITY

@@ -1,0 +1,25 @@
+check device rootfs-85 with path /dev/sda1
+      alert sistemas@emergya.com with mail-format {
+                subject: [Alertas] $HOST rootfs capacity is over 85%
+                message: Monit $ACTION $SERVICE at $DATE on $HOST:
+                         $DESCRIPTION.
+
+You should be thinking to BUY some extra disk space :)
+
+Yours sincerely,
+monit
+      }
+      if space usage > 85% then alert
+
+check device rootfs-95 with path /dev/sda1
+      alert sistemas@emergya.com with mail-format {
+                subject: [Alertas] $HOST rootfs capacity is over 95%
+                message: Monit $ACTION $SERVICE at $DATE on $HOST:
+                         $DESCRIPTION.
+
+You should be thinking to INSTALL some extra disk space :)
+
+Yours sincerely,
+monit
+      }
+      if space usage > 95% then alert
