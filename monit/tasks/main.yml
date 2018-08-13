@@ -8,23 +8,23 @@
 
 - name: copy monit configuration files
   template:
-      src: {{item}}
+      src: "{{item}}"
       dest: "/etc/monit/conf.d/{{item}}"
       mode: "0700"
       force: yes
   with_items:
-    - {{ template_files.stdout_lines }}
+    - "{{ template_files.stdout_lines }}"
   notify: restart monit
 
 - name: copy monit scripts
   copy:
-    src: {{item}}
+    src: "{{item}}"
     dest: /usr/local/bin/{{item}}
     owner: root
     group: root
     mode: 0755
   with_items:
-    - {{ files/scripts/* }}
+    - "{{ files/scripts/* }}"
   notify: restart monit
 
 - name: ensure monit is enabled
