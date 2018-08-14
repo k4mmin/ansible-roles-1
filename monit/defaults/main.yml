@@ -18,10 +18,16 @@ monit_mailserver_username_password: !vault |
     6539343737666232620a333930393839613534303965396265336331383763316339326261386537
     3236
 # check-zpool-capacity
-monit_zfs_enabled: True
+monit_zfs_enabled: False
 monit_zfs_zpool:
   - "new_pool"
 # check-fs-usage
 monit_check_filesystem_enabled: True
 monit_check_filesystem_path:
+  - "/"
   - "/dev/xvda"
+# check-umount-fs-usage
+monit_check_umount_filesystem_enabled: False
+monit_check_umount_filesystem_percentage: 80
+monit_check_umount_filesystem_path:
+  - "/var/lib/mysql"

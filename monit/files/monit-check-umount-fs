@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# runs alert in monit only if a partition is mounted and their use is over X%
+PARTITION="$1"
+USE_LIMIT="$2"
+mountpoint -q ${PARTITION}
+if [ $? -eq 0 ]
+then
+  PARTITION_USE=$(df --output=target,pcent | grep -w ${PARTITION} | awk '{print substr($2, 1, length($2)-1)}')
+  if [ ${PARTITION_USE} -gt ${USE_LIMIT} ]
+  then
+    echo "[!] ALERT. Partition ${PARTITION} use is ${PARTITION_USE}%"
+    exit 3
+  else
+    echo "[!] RECOVERY. Partition ${PARTITION} use is less than ${USE_LIMIT}%"
+  fi
+fi
