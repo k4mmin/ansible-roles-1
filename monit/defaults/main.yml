@@ -7,7 +7,7 @@ monit_webinterface_acl_rules:
 # 00-set-alertmail
 monit_alert_recipient: "sistemas@emergya.com"
 # 00-smtp-config
-monit_mailserver_username: "emergya.monitor@gmail.com"
+monit_mailserver_username1: "emergya.monitor@gmail.com"
 # emergya.monitor@gmail.com_password: !vault |
 #     $ANSIBLE_VAULT;1.1;AES256
 #     62613636393965366664366265303866613463323065343133623636653938303339643134353561
@@ -15,4 +15,4 @@ monit_mailserver_username: "emergya.monitor@gmail.com"
 #     38623161323661613463626432623236633138343136623565653732393033343230636531666334
 #     3563383231656163620a303963326265363931616130646634353033383261323536323361663030
 #     3561
-emergya.monitor@gmail.com_password: "qwerty"
+monit_mailserver_username1_password: "qwerty"
