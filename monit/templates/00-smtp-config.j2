@@ -1,3 +1,3 @@
 set mailserver smtp.gmail.com port 587
-  username "emergya.monitor@gmail.com" password "s0port33E"
+  username {{ monit_mailserver_username }} password {{ [monit_mailserver_username + '_password'] }}
   using tlsv1
