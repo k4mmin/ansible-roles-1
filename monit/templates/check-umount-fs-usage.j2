@@ -1,7 +1,7 @@
 # {{ ansible_managed }}
 {% if monit_check_umount_filesystem_enabled %}
 {% for path in monit_check_umount_filesystem_path %}
-check program check_db_filesystem with path /usr/local/bin/monit-check-partition.sh {{ path }} {{ monit_check_umount_filesystem_percentage }}
+check program check-fs-{{ loop.index }} with path /usr/local/bin/monit-check-partition.sh {{ path }} {{ monit_check_umount_filesystem_percentage }}
       if status != 0 then alert
       alert intef-procomun-ute-dos-monit@emergya.com with mail-format {
       subject: monit alert --  $SERVICE

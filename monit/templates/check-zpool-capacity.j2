@@ -1,7 +1,7 @@
 # {{ ansible_managed }}
 {% if monit_zfs_enabled %}
 {% for zpool in monit_zfs_zpool %}
-check program base-zpool-capacity-85 with path "/usr/local/bin/monit-check-zpool-capacity {{ zpool }}"
+check program {{ zpool }}-capacity-85 with path "/usr/local/bin/monit-check-zpool-capacity {{ zpool }}"
       alert sistemas@emergya.com with mail-format {
 		subject: [Alertas] $HOST base-zpool capacity is over 85%
 		message: Monit $ACTION $SERVICE at $DATE on $HOST:
@@ -17,7 +17,7 @@ monit
       if status > 85
       then alert
 
-check program base-zpool-capacity-95 with path "/usr/local/bin/monit-check-zpool-capacity {{ zpool }}"
+check program {{ zpool }}-capacity-95 with path "/usr/local/bin/monit-check-zpool-capacity {{ zpool }}"
       alert sistemas@emergya.com with mail-format {
 		subject: [Alertas] $HOST base-zpool capacity is over 95%
 		message: Monit $ACTION $SERVICE at $DATE on $HOST:
