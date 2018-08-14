@@ -28,7 +28,7 @@
     group: root
     mode: 0755
   with_items:
-    - "scripts/monit-check-zpool-capacity"
+    - "monit-check-zpool-capacity"
   notify: restart monit
 
 - name: ensure monit is enabled
