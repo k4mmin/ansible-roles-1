@@ -16,8 +16,8 @@
     - "00-enable-httpd-interface.j2"
     - "00-set-alertmail.j2"
     - "00-smtp-config.j2"
-    - "check-base-zpool-capacity.j2"
-    - "check-rootfs-usage.j2"
+    - "check-zpool-capacity.j2"
+    - "check-fs-usage.j2"
   notify: restart monit
 
 - name: copy monit scripts
