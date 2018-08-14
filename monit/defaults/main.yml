@@ -1,18 +1,9 @@
 ---
-# defaults file for monit
-monit_check_services_intervals: "5"
-
-monit_process_to_check:
-    - name: nginx
-      pid: /var/run/nginx.pid
-      start_command: /etc/init.d/nginx start
-      stop_command: /etc/init.d/nginx stop
-      timeout: 10
-      terms:
-          - if failed port 80 for 2 cycles then restart
-
-monit_sender_account_email: "email@gmail.com"
-monit_sender_account_password: "emailpass"
-
-monit_alert_recipients:
-    - email@gmail.com
+# 00-enable-httpd-interface
+monit_webinterface_enabled: true
+monit_webinterface_port: 2812
+monit_webinterface_acl_rules:
+  - "89.140.125.66/32"
+# 00-set-alertmail
+monit_alert_recipient: "sistemas@emergya.com"
+# 00-smtp-config

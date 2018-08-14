@@ -1,4 +1,13 @@
-set httpd port 2812 and
-    allow localhost
-    allow 10.35.1.0/24
-    allow 10.35.35.0/24
+# {{ ansible_managed }}
+{% if monit_webinterface_enabled %}
+set httpd
+  port {{ monit_webinterface_port }}
+  use address {{ monit_webinterface_bind }}
+{% if monit_webinterface_acl_rules is defined %}
+{% for rule in monit_webinterface_acl_rules %}
+    allow {{ rule }}
+{% endfor %}
+{% endif %}
+{% else %}
+# No Webinterface
+{% endif %}
