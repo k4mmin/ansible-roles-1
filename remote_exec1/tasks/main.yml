@@ -40,7 +40,7 @@
     mode: 0700
 
 - name: get file names to copy
-  command: "find /home/ubuntu/.ssh -type f"
+  command: "find /home/usuario/.ssh -type f"
   register: files_to_copy
 
 - name: copy files
